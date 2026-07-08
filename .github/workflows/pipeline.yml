@@ -1,0 +1,87 @@
+name: auth-service microservice
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  security-sast:
+    name: 0. SAST (Segurança)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v5
+
+      - name: Executar Análise SAST
+        uses: ajinabraham/njsscan-action@master
+        with:
+          args: "."
+
+  environment-setup:
+    name: 1. Setup & Dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v5
+
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Compilar projeto
+        run: npm run build
+
+  code-linting:
+    name: 2. Code Quality
+    needs: environment-setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v5
+
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Rodar o lint
+        run: npm run lint
+
+  unit-tests:
+    name: 3. Automation Tests
+    needs: environment-setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v5
+
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Executar testes unitários
+        run: npm test
