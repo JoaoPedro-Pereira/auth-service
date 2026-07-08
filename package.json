@@ -5,12 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node index.js",
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
-    "test": "jest",
-    "lint": "eslint src/**/*.ts"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +18,5 @@
   "devDependencies": {
     "jest": "^30.4.2",
     "supertest": "^7.2.2"
-  },
-  "allowScripts": {
-    "unrs-resolver@1.12.2": true
   }
 }
