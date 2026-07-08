@@ -42,7 +42,7 @@ jobs:
         run: npm install
 
       - name: Compilar projeto
-        run: npm run build
+        run: npm run dev
 
   code-linting:
     name: 2. Code Quality
