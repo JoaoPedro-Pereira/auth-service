@@ -39,10 +39,10 @@ jobs:
           cache: npm
 
       - name: Instalar dependências
-        run: npm install -y
+        run: npm ci
 
       - name: Compilar projeto
-        run: npm run build
+        run: npm build
 
   code-linting:
     name: 2. Code Quality
